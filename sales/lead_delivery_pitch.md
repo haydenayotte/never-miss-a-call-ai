@@ -1,7 +1,7 @@
 # The "No-Software" Lead Delivery Pitch
 
 ## Core Concept
-Roofing owners are busy. They are often on-site, on ladders, or driving between jobs. They don't want to log into a complex CRM (GoHighLevel) or learn new software. 
+Roofing owners are busy. They are often on-site, on ladders, or driving between jobs. They don't want to log into a complex CRM or learn new software. 
 
 We deliver leads where they already live: **SMS (Text) and Google Sheets.**
 

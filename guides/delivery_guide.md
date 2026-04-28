@@ -9,13 +9,13 @@ This guide outlines the internal delivery process and the demonstration script u
 ### 1. Rapid Deployment Workflow (T-Minus 24 Hours)
 Follow these steps to get a new roofing client live within one business day:
 
-**Phase 1: Sub-account & Integration (Hours 0-4)**
-1.  **GHL Sub-account Provisioning**:
-    - Deploy the "Never Miss A Call" Snapshot to a new GoHighLevel sub-account.
-    - Ensure all custom fields (`Property Address`, `Quote Range`, etc.) are active.
-2.  **Number Acquisition/Mapping**:
-    - Buy a new local number in GHL for the client.
-    - Map this number to the VAPI inbound SIP/webhook.
+**Phase 1: Database & Voice Setup (Hours 0-4)**
+1.  **Google Sheets Setup**:
+    - Duplicate the "Never Miss A Call" Lead Master Template.
+    - Share the sheet with the client and internal team.
+2.  **Number Acquisition & Mapping**:
+    - Provision a new local number directly in Vapi or port the client's number.
+    - Link the number to the primary English Assistant.
 
 **Phase 2: AI Customization (Hours 4-8)**
 3.  **Voice AI (VAPI) Deployment**:
@@ -25,13 +25,13 @@ Follow these steps to get a new roofing client live within one business day:
 4.  **Bilingual Handoff Test**:
     - Run a test call to the English agent, speak Spanish, and verify the transfer works perfectly.
 
-**Phase 3: Automation & Calendar (Hours 8-16)**
-5.  **GHL Workflow Sync**:
-    - Set up the post-call webhook in VAPI to point to the GHL workflow trigger.
-    - Test the webhook by completing a dummy call and checking if the contact is created in GHL with the correct custom fields.
-6.  **Calendar Integration**:
-    - Connect the client’s Google or Outlook calendar to the GHL "Roof Inspection" calendar.
-    - Set availability buffers (e.g., no same-day bookings within 2 hours).
+**Phase 3: Automation & Notification (Hours 8-16)**
+5.  **n8n Workflow Sync**:
+    - Deploy the standard n8n blueprint for the client.
+    - Connect the Vapi post-call webhook to the n8n trigger.
+    - Test the webhook by completing a dummy call and checking if the row is appended to the Google Sheet.
+6.  **Notification Testing**:
+    - Ensure the client's mobile number is correctly configured in n8n/Twilio to receive instant lead alerts.
 
 **Phase 4: QA & Handover (Hours 16-24)**
 7.  **End-to-End QA**:

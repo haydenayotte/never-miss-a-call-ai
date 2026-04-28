@@ -30,6 +30,6 @@ If we capture just a fraction of those missed calls, here is the impact on your 
 *   **Direct Booking:** Appointments appear on your calendar while you're in the field or asleep.
 
 ## 4. Next Steps
-*   [ ] Connect GoHighLevel / Google Calendar.
+*   [ ] Connect Google Sheets / Calendar.
 *   [ ] Set up SMS Lead Alerts.
 *   [ ] Go Live: Stop the leak today.

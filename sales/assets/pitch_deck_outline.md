@@ -24,7 +24,7 @@
     *   Native-level Bilingual (English & Spanish).
     *   Available 24/7/365 (No sick days, no breaks).
     *   Calculates Tentative Quotes on the fly.
-    *   Integrated with your GoHighLevel/Calendar.
+    *   Integrated with your Sheets & Calendar.
 
 ## Slide 5: How It Works (The 3-Step Win)
 1. **The Catch:** AI answers every call on the first ring.

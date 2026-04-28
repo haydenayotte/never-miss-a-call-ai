@@ -112,9 +112,9 @@ Uso de Herramientas:
 
 ---
 
-## 4. Technical Implementation Notes (GoHighLevel)
-- **Custom Fields**: `address`, `living_area`, `roof_size_est`, `material_preference`, `quote_range`, `appointment_time`.
+## 4. Technical Implementation Notes (Lean Stack: Vapi + n8n + Google Sheets)
+- **Data Capture**: `address`, `living_area`, `roof_size_est`, `material_preference`, `quote_range`, `appointment_time`.
 - **Workflow**:
     - Inbound Call -> English AI Agent.
     - If `language_intent` == 'spanish' -> Transfer Call.
-    - Post-call -> Create/Update Opportunity and trigger SMS confirmation.
+    - Post-call -> n8n Webhook -> Append Row to Google Sheet -> SMS Notification to Owner.
