@@ -17,6 +17,8 @@ Both agents use custom prompt logic for automatic quote calculation based on roo
 
 ## Repository Structure
 
+- `website/`: The professional landing page for the business.
+  - `index.html`: High-converting Tailwind CSS landing page.
 - `agent/`: Contains the core logic and prompts for the AI voice agents.
   - `agent_logic.md`: Prompt engineering and logic definitions.
 - `technical/`: Technical documentation and automation blueprints.

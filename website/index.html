@@ -1,352 +1,289 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Never Miss A Call | 24/7 Bilingual AI Receptionist for Roofers</title>
+    <title>Never Miss A Call | Bilingual AI Receptionist for Roofers</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            dark: '#0f172a',
-                            accent: '#f97316', // Safety Orange
-                            blue: '#3b82f6',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+        body { font-family: 'Inter', sans-serif; }
         .gradient-text {
-            background: linear-gradient(to right, #f97316, #3b82f6);
+            background: linear-gradient(90deg, #f97316 0%, #fb923c 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
-<body class="bg-brand-dark text-slate-200 font-sans antialiased">
+<body class="bg-slate-950 text-slate-200 antialiased">
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass top-0">
+    <!-- Nav -->
+    <nav class="border-b border-slate-800 bg-slate-950/50 backdrop-blur-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
-                <div class="flex items-center space-x-2">
-                    <div class="w-10 h-10 bg-brand-accent rounded-lg flex items-center justify-center">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-orange-500 rounded flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     </div>
-                    <span class="text-xl font-extrabold tracking-tight text-white uppercase">Never Miss A Call</span>
+                    <span class="font-bold text-xl tracking-tight text-white uppercase italic">Never Miss A Call</span>
                 </div>
-                <div class="hidden md:flex space-x-8 text-sm font-medium uppercase tracking-widest">
-                    <a href="#problem" class="hover:text-brand-accent transition">The Problem</a>
-                    <a href="#how-it-works" class="hover:text-brand-accent transition">How It Works</a>
-                    <a href="#roi" class="hover:text-brand-accent transition">ROI</a>
-                    <a href="#faq" class="hover:text-brand-accent transition">FAQ</a>
-                </div>
-                <div>
-                    <a href="#contact" class="bg-brand-accent hover:bg-orange-600 text-white px-6 py-3 rounded-full font-bold transition transform hover:scale-105 inline-block">Book A Demo</a>
+                <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                    <a href="#problem" class="hover:text-orange-500 transition">The Problem</a>
+                    <a href="#roi" class="hover:text-orange-500 transition">ROI</a>
+                    <a href="#solution" class="hover:text-orange-500 transition">How it Works</a>
+                    <a href="#contact" class="bg-orange-500 text-white px-5 py-2 rounded hover:bg-orange-600 transition shadow-lg shadow-orange-500/20">Book Inspection</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <img src="images/hero-roofing.png" alt="Roofing Background" class="w-full h-full object-cover opacity-20">
-            <div class="absolute inset-0 bg-gradient-to-b from-brand-dark via-transparent to-brand-dark"></div>
-        </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-6">
-                Never Miss a <span class="gradient-text">$15,000</span> <br>Roofing Job Again.
-            </h1>
-            <p class="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto mb-10">
-                The only 24/7 Bilingual AI Receptionist that answers every call, provides instant quotes, and books inspections—in both English and Spanish.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-                <a href="#contact" class="bg-brand-accent hover:bg-orange-600 text-white px-8 py-4 rounded-xl font-bold text-lg transition shadow-lg shadow-orange-900/20">Capture My Missed Leads</a>
-                <a href="#how-it-works" class="glass text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/10 transition">See How It Works</a>
+    <header class="relative py-20 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="inline-block px-3 py-1 bg-orange-500/10 text-orange-500 text-xs font-bold tracking-widest uppercase rounded-full border border-orange-500/20 mb-6">Built for High-Growth Roofing Companies</span>
+                    <h1 class="text-5xl lg:text-7xl font-extrabold text-white leading-tight mb-6">
+                        Stop Leaving <span class="gradient-text">$15,000 Jobs</span> on the Table.
+                    </h1>
+                    <p class="text-xl text-slate-400 mb-10 leading-relaxed">
+                        The only 24/7 bilingual AI receptionist that quotes roof replacements, qualifies insurance claims, and books inspections on your calendar. Works while you sleep. Speaks perfect Spanish.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact" class="bg-orange-500 text-white px-8 py-4 rounded-lg font-bold text-center hover:bg-orange-600 transition shadow-xl shadow-orange-500/30">Capture Missed Jobs Now</a>
+                        <a href="#solution" class="bg-slate-900 text-white border border-slate-800 px-8 py-4 rounded-lg font-bold text-center hover:bg-slate-800 transition">How it Works</a>
+                    </div>
+                    <div class="mt-10 flex items-center gap-4 text-sm text-slate-500">
+                        <div class="flex -space-x-2">
+                            <img class="w-8 h-8 rounded-full border-2 border-slate-950" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="">
+                            <img class="w-8 h-8 rounded-full border-2 border-slate-950" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="">
+                            <img class="w-8 h-8 rounded-full border-2 border-slate-950" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" alt="">
+                        </div>
+                        <span>Trusted by 50+ roofing contractors in LA, Houston & Miami</span>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl blur opacity-20"></div>
+                    <div class="relative bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-2xl">
+                        <img src="images/hero-roofing.png" alt="Roofing AI Visual" class="rounded-xl">
+                    </div>
+                </div>
             </div>
-            <div class="mt-16 flex justify-center items-center space-x-12 opacity-50 grayscale hover:grayscale-0 transition duration-500">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/GoHighLevel_Logo.png" alt="GHL" class="h-8 hidden">
-                <span class="text-lg font-bold tracking-widest text-slate-500 uppercase">Trusted by Elite Roofing Contractors</span>
-            </div>
         </div>
-    </section>
+    </header>
 
-    <!-- The Problem: The Missed Call Tax -->
+    <!-- The Problem Section -->
     <section id="problem" class="py-24 bg-slate-900/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-6">
-                        The <span class="text-brand-accent">$172,800</span> "Missed Call Tax" <br>You're Paying Every Year.
-                    </h2>
-                    <p class="text-lg text-slate-400 mb-8 leading-relaxed">
-                        Roofing owners spend $50-$200 per lead. But 40% of those calls happen after-hours, and 30-50% of homeowners in your market prefer Spanish. 
-                        <br><br>
-                        If you're not answering 24/7 in their native language, you're handing $15,000 jobs directly to your competitors.
-                    </p>
-                    <ul class="space-y-4">
-                        <li class="flex items-start space-x-3">
-                            <svg class="w-6 h-6 text-brand-accent mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span class="text-slate-300"><strong>The Language Barrier:</strong> 50% of LA and Houston callers hang up if they can't speak Spanish.</span>
-                        </li>
-                        <li class="flex items-start space-x-3">
-                            <svg class="w-6 h-6 text-brand-accent mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span class="text-slate-300"><strong>The After-Hours Leak:</strong> Leads don't wait until Monday at 9 AM to call.</span>
-                        </li>
-                        <li class="flex items-start space-x-3">
-                            <svg class="w-6 h-6 text-brand-accent mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span class="text-slate-300"><strong>Human Cost:</strong> A 24/7 bilingual staff costs $5,000+/mo. Our AI costs a fraction.</span>
-                        </li>
-                    </ul>
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-5xl font-bold text-white mb-4 italic uppercase">The "Missed Call Tax"</h2>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">In your market, 40% of leads call after hours or prefer Spanish. If they hear a standard voicemail, they hang up and call the next guy on Google.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-slate-950 p-8 rounded-2xl border border-slate-800 hover:border-orange-500/50 transition">
+                    <div class="text-orange-500 mb-4 font-bold text-4xl">40%</div>
+                    <h3 class="text-xl font-bold text-white mb-2 underline decoration-orange-500 decoration-2">After-Hours Loss</h3>
+                    <p class="text-slate-400">Leads don't wait for your office to open. They want an answer at 9 PM on Sunday.</p>
                 </div>
-                <div class="bg-brand-dark p-8 rounded-3xl border border-slate-800 shadow-2xl">
-                    <h3 class="text-xl font-bold text-white mb-6">The Math of Recovery</h3>
-                    <div class="space-y-6">
-                        <div class="flex justify-between items-center pb-4 border-b border-slate-800">
-                            <span class="text-slate-400">Average Roof Job</span>
-                            <span class="text-xl font-bold text-white">$15,000</span>
-                        </div>
-                        <div class="flex justify-between items-center pb-4 border-b border-slate-800">
-                            <span class="text-slate-400">Missed Spanish/After-Hours Leads/mo</span>
-                            <span class="text-xl font-bold text-white">15</span>
-                        </div>
-                        <div class="flex justify-between items-center pb-4 border-b border-slate-800">
-                            <span class="text-slate-400">Recovered Jobs (10% Close)</span>
-                            <span class="text-xl font-bold text-white">1.5 / mo</span>
-                        </div>
-                        <div class="flex justify-between items-center pt-4">
-                            <span class="text-brand-accent font-bold uppercase tracking-widest text-sm">Monthly Found Profit</span>
-                            <span class="text-3xl font-extrabold text-brand-accent">$5,625</span>
-                        </div>
-                        <div class="flex justify-between items-center pt-2">
-                            <span class="text-brand-blue font-bold uppercase tracking-widest text-sm">Annual Found Profit</span>
-                            <span class="text-4xl font-extrabold text-brand-blue">$67,500</span>
-                        </div>
-                    </div>
-                    <p class="mt-8 text-sm text-slate-500 italic text-center">
-                        *Conservative estimate based on industry averages in major TX/CA/FL markets.
-                    </p>
+                <div class="bg-slate-950 p-8 rounded-2xl border border-slate-800 hover:border-orange-500/50 transition">
+                    <div class="text-orange-500 mb-4 font-bold text-4xl">35%</div>
+                    <h3 class="text-xl font-bold text-white mb-2 underline decoration-orange-500 decoration-2">The Spanish Gap</h3>
+                    <p class="text-slate-400">In LA and Houston, over a third of homeowners prefer Spanish. If you can't talk shop, you lose the job.</p>
+                </div>
+                <div class="bg-slate-950 p-8 rounded-2xl border border-slate-800 hover:border-orange-500/50 transition">
+                    <div class="text-orange-500 mb-4 font-bold text-4xl">100%</div>
+                    <h3 class="text-xl font-bold text-white mb-2 underline decoration-orange-500 decoration-2">Speed to Lead</h3>
+                    <p class="text-slate-400">The first roofer to give a price range and book the inspection wins. We make sure you're always first.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How It Works -->
-    <section id="how-it-works" class="py-24">
+    <!-- ROI Section -->
+    <section id="roi" class="py-24 border-y border-slate-800 bg-slate-950">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-20">
-                <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-6">Seamless, Professional, Automatic.</h2>
-                <p class="text-xl text-slate-400">We don't just take messages. We close the gap between call and contract.</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-12">
-                <!-- Step 1 -->
-                <div class="relative group">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-brand-accent to-brand-blue rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-                    <div class="relative bg-brand-dark p-8 rounded-2xl border border-slate-800 h-full">
-                        <div class="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center mb-6 text-brand-accent font-black text-2xl">1</div>
-                        <h3 class="text-xl font-bold text-white mb-4">Bilingual Handoff</h3>
-                        <p class="text-slate-400">The AI answers in English. If the caller speaks Spanish, it instantly transfers them to a native-level Spanish AI specialist. No lag, no friction.</p>
+            <div class="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-3xl p-8 lg:p-16 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-orange-500/5 blur-3xl -mr-32 -mt-32"></div>
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-4xl font-bold text-white mb-6">Stop Leaving <span class="text-orange-500 underline">$172,800</span> on the Table</h2>
+                        <p class="text-slate-400 text-lg mb-8 leading-relaxed">
+                            A single missed roof replacement costs you ~$3,750 in net profit. Most contractors miss 10-20 of these calls per month across Spanish and after-hours segments.
+                        </p>
+                        <ul class="space-y-4 mb-10">
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-orange-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                <span class="text-slate-300 font-semibold">Recovers 10+ leads per month</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-orange-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                <span class="text-slate-300 font-semibold">Captures Spanish-speaking market</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-orange-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                <span class="text-slate-300 font-semibold">Pays for itself with ONE captured job</span>
+                            </li>
+                        </ul>
+                        <div class="bg-orange-500/10 border border-orange-500/20 p-6 rounded-xl">
+                            <div class="text-xs font-bold text-orange-500 uppercase tracking-widest mb-1">Conservative ROI Estimate</div>
+                            <div class="text-3xl font-bold text-white">$14,400 / Month <span class="text-slate-500 text-sm font-normal">in recovered profit</span></div>
+                        </div>
                     </div>
-                </div>
-                <!-- Step 2 -->
-                <div class="relative group">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-brand-accent to-brand-blue rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-                    <div class="relative bg-brand-dark p-8 rounded-2xl border border-slate-800 h-full">
-                        <div class="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center mb-6 text-brand-accent font-black text-2xl">2</div>
-                        <h3 class="text-xl font-bold text-white mb-4">Instant Tentative Quote</h3>
-                        <p class="text-slate-400">Using our proprietary formula, the AI calculates a price range based on the address and roof size during the first call. Trust is built instantly.</p>
-                    </div>
-                </div>
-                <!-- Step 3 -->
-                <div class="relative group">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-brand-accent to-brand-blue rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-                    <div class="relative bg-brand-dark p-8 rounded-2xl border border-slate-800 h-full">
-                        <div class="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center mb-6 text-brand-accent font-black text-2xl">3</div>
-                        <h3 class="text-xl font-bold text-white mb-4">Booked Inspection</h3>
-                        <p class="text-slate-400">Once qualified, the AI books an inspection directly onto your calendar (Google/GHL/Outlook) and sends a confirmation text to the lead.</p>
+                    <div class="bg-slate-950 p-8 rounded-2xl border border-slate-800 shadow-inner">
+                        <h3 class="text-xl font-bold text-white mb-6 uppercase italic">Why hire when you can automate?</h3>
+                        <div class="space-y-6">
+                            <div class="flex justify-between items-center pb-4 border-b border-slate-800">
+                                <div class="text-slate-400">Bilingual Receptionist</div>
+                                <div class="text-white font-bold text-lg">$6,500/mo</div>
+                            </div>
+                            <div class="flex justify-between items-center pb-4 border-b border-slate-800">
+                                <div class="text-slate-400">Standard Answering Service</div>
+                                <div class="text-white font-bold text-lg">$1,200/mo <span class="text-red-500 text-xs font-normal">(Misses Spanish)</span></div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="text-orange-500 font-bold">Never Miss A Call AI</div>
+                                <div class="text-orange-500 font-bold text-2xl">$997/mo</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Product Showcase: The Quoting Engine -->
-    <section id="roi" class="py-24 bg-slate-900/30 overflow-hidden">
+    <!-- How it Works Section -->
+    <section id="solution" class="py-24 bg-slate-950">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div class="relative">
-                    <img src="images/ai-receptionist.png" alt="AI Quoting Engine" class="rounded-3xl shadow-2xl border border-slate-800">
-                    <div class="absolute -bottom-8 -right-8 glass p-6 rounded-2xl shadow-xl max-w-xs border border-white/10">
-                        <p class="text-brand-accent font-bold mb-2 uppercase text-xs tracking-tighter">AI Processing...</p>
-                        <p class="text-white text-sm">"Based on your 3,000 sq ft roof, your tentative estimate is $18,900 - $23,100. Would you like to book an inspection for Tuesday at 2 PM?"</p>
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-5xl font-bold text-white mb-4 italic uppercase">The AI Advantage</h2>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">Not just a chatbot. A full-service roofing sales agent.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div class="space-y-4">
+                    <div class="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center mx-auto border border-slate-800 text-orange-500">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>
                     </div>
+                    <h3 class="text-lg font-bold text-white uppercase">Bilingual Handoff</h3>
+                    <p class="text-sm text-slate-400">Detects Spanish mid-call and instantly transfers to a native-voiced Spanish agent.</p>
                 </div>
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-6">Smart Quoting. <br>Higher Conversions.</h2>
-                    <p class="text-lg text-slate-400 mb-8">
-                        Most answering services just take a name and number. We provide value. By giving the caller a ballpark figure immediately, you stop them from calling the next roofer on Google.
-                    </p>
-                    <div class="space-y-6">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 rounded-full bg-brand-blue/20 flex items-center justify-center flex-shrink-0">
-                                <svg class="w-6 h-6 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                            </div>
-                            <div>
-                                <h4 class="text-white font-bold text-lg">Address-Based Logic</h4>
-                                <p class="text-slate-400">Calculates estimates based on living area and industry multipliers.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 rounded-full bg-brand-blue/20 flex items-center justify-center flex-shrink-0">
-                                <svg class="w-6 h-6 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            </div>
-                            <div>
-                                <h4 class="text-white font-bold text-lg">Material Qualification</h4>
-                                <p class="text-slate-400">Differentiates between Asphalt, Metal, and Tile on the fly.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 rounded-full bg-brand-blue/20 flex items-center justify-center flex-shrink-0">
-                                <svg class="w-6 h-6 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                            </div>
-                            <div>
-                                <h4 class="text-white font-bold text-lg">Calendar Integration</h4>
-                                <p class="text-slate-400">No double bookings. Only offers slots you're actually available for.</p>
-                            </div>
-                        </div>
+                <div class="space-y-4">
+                    <div class="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center mx-auto border border-slate-800 text-orange-500">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
                     </div>
+                    <h3 class="text-lg font-bold text-white uppercase">Instant Quoting</h3>
+                    <p class="text-sm text-slate-400">Calculates roof size and provides a tentative $20k-$25k range on the first call.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center mx-auto border border-slate-800 text-orange-500">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white uppercase">Direct Booking</h3>
+                    <p class="text-sm text-slate-400">Pushes qualified appointments directly onto your Google or Outlook calendar.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center mx-auto border border-slate-800 text-orange-500">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white uppercase">Text-to-Lead</h3>
+                    <p class="text-sm text-slate-400">Receive a text with name, address, and quote the second the AI hangs up.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- No Software Advantage -->
-    <section class="py-24">
+    <!-- Delivery Section -->
+    <section class="py-24 bg-slate-900/50 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div class="order-2 lg:order-1">
-                    <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-6">Zero New Software <br>To Learn.</h2>
-                    <p class="text-lg text-slate-400 mb-8 leading-relaxed">
-                        We know you're in the field, not in front of a laptop. That's why we deliver every lead via SMS and Google Sheets. You get a text, you click the address, you drive to the job. It's that simple.
-                    </p>
-                    <div class="flex space-x-8">
-                        <div class="text-center">
-                            <div class="text-3xl font-extrabold text-white">100%</div>
-                            <div class="text-sm text-slate-500 uppercase tracking-widest font-bold">Mobile First</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-3xl font-extrabold text-white">5 Min</div>
-                            <div class="text-sm text-slate-500 uppercase tracking-widest font-bold">Setup Time</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-3xl font-extrabold text-white">24/7</div>
-                            <div class="text-sm text-slate-500 uppercase tracking-widest font-bold">Monitoring</div>
+                    <div class="relative">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl blur opacity-20"></div>
+                        <div class="relative bg-slate-950 border border-slate-800 rounded-2xl p-2 shadow-2xl transform lg:-rotate-2">
+                            <img src="images/lead-delivery.png" alt="SMS Lead Delivery" class="rounded-xl">
                         </div>
                     </div>
                 </div>
                 <div class="order-1 lg:order-2">
-                    <img src="images/lead-delivery.png" alt="SMS Lead Delivery" class="rounded-3xl shadow-2xl border border-slate-800">
+                    <h2 class="text-4xl font-bold text-white mb-6">Zero Software. <span class="text-orange-500 italic">Just Leads.</span></h2>
+                    <p class="text-slate-400 text-lg mb-8 leading-relaxed">
+                        We know you’re on the roof, not at a desk. You don’t need another CRM to log into. We deliver everything via **SMS (Text)** and a simple **Google Sheet**. No passwords, no dashboards, no learning curve.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex gap-4">
+                            <div class="w-6 h-6 bg-orange-500/20 rounded flex items-center justify-center text-orange-500 flex-shrink-0">✓</div>
+                            <p class="text-slate-300 font-medium">Get notified while you're in the field</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-6 h-6 bg-orange-500/20 rounded flex items-center justify-center text-orange-500 flex-shrink-0">✓</div>
+                            <p class="text-slate-300 font-medium">Manage leads in a simple spreadsheet</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-6 h-6 bg-orange-500/20 rounded flex items-center justify-center text-orange-500 flex-shrink-0">✓</div>
+                            <p class="text-slate-300 font-medium">Zero training required for your team</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ -->
-    <section id="faq" class="py-24 bg-slate-900/50">
+    <!-- FAQ Section -->
+    <section class="py-24 bg-slate-950">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-12 text-center">Frequently Asked Questions</h2>
+            <h2 class="text-3xl font-bold text-white mb-12 text-center">Frequently Asked Questions</h2>
             <div class="space-y-6">
-                <div class="glass p-6 rounded-xl border border-white/5">
-                    <h4 class="text-white font-bold text-lg mb-2">Does it sound robotic?</h4>
-                    <p class="text-slate-400">Our AI uses the latest neural voices that sound indistinguishable from humans to most callers. Even better, it never has a "bad day," never sounds tired, and is always professional.</p>
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl">
+                    <h3 class="text-lg font-bold text-white mb-2 italic">Does it sound like a robot?</h3>
+                    <p class="text-slate-400">No. We use native-level bilingual voices that are indistinguishable from a human for 95% of callers. Most importantly, they actually solve the caller's problem.</p>
                 </div>
-                <div class="glass p-6 rounded-xl border border-white/5">
-                    <h4 class="text-white font-bold text-lg mb-2">How do you handle Spanish?</h4>
-                    <p class="text-slate-400">We use a dedicated Spanish-language AI model. As soon as the caller indicates they prefer Spanish, the system transfers them seamlessly. It's not a translation—it's a native Spanish agent.</p>
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl">
+                    <h3 class="text-lg font-bold text-white mb-2 italic">Is it hard to set up?</h3>
+                    <p class="text-slate-400">We handle 100% of the tech. We can have your custom agent live and answering calls in under 24 hours. You just forward your phone.</p>
                 </div>
-                <div class="glass p-6 rounded-xl border border-white/5">
-                    <h4 class="text-white font-bold text-lg mb-2">What if the quote is wrong?</h4>
-                    <p class="text-slate-400">The AI explicitly states that this is a "tentative estimate" based on the size provided. It’s designed to qualify the lead and build interest, not to replace your final on-site inspection.</p>
-                </div>
-                <div class="glass p-6 rounded-xl border border-white/5">
-                    <h4 class="text-white font-bold text-lg mb-2">Is it hard to set up?</h4>
-                    <p class="text-slate-400">No. We handle everything. We just need your service areas, pricing, and calendar link. You can be up and running in less than 24 hours.</p>
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl">
+                    <h3 class="text-lg font-bold text-white mb-2 italic">Can it handle insurance claims?</h3>
+                    <p class="text-slate-400">Yes. The AI is specifically programmed to ask if the project is an insurance claim and qualifies the lead based on their response.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact/CTA -->
-    <section id="contact" class="py-24 relative overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <div class="absolute inset-0 bg-brand-accent/10"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-accent/10 rounded-full blur-[120px]"></div>
-        </div>
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-8">Ready to capture your <span class="text-brand-accent">missing leads?</span></h2>
-            <p class="text-xl text-slate-400 mb-12">Book a 15-minute demo to see the AI in action and get a custom ROI audit for your city.</p>
-            <div class="bg-brand-dark p-8 rounded-3xl border border-slate-800 shadow-2xl text-left">
-                <form class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-slate-400 text-sm font-bold mb-2 uppercase tracking-widest">Full Name</label>
-                        <input type="text" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-accent transition" placeholder="John Doe">
-                    </div>
-                    <div>
-                        <label class="block text-slate-400 text-sm font-bold mb-2 uppercase tracking-widest">Company Name</label>
-                        <input type="text" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-accent transition" placeholder="Elite Roofing LLC">
-                    </div>
-                    <div>
-                        <label class="block text-slate-400 text-sm font-bold mb-2 uppercase tracking-widest">Phone Number</label>
-                        <input type="tel" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-accent transition" placeholder="(555) 000-0000">
-                    </div>
-                    <div>
-                        <label class="block text-slate-400 text-sm font-bold mb-2 uppercase tracking-widest">City</label>
-                        <input type="text" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-accent transition" placeholder="e.g. Houston, TX">
-                    </div>
-                    <div class="md:col-span-2">
-                        <button type="submit" class="w-full bg-brand-accent hover:bg-orange-600 text-white font-bold py-4 rounded-xl text-xl transition transform hover:scale-[1.02] shadow-xl shadow-orange-900/20">
-                            Book My Free Demo & ROI Audit
-                        </button>
-                    </div>
-                </form>
+    <!-- CTA Section -->
+    <section id="contact" class="py-24 bg-slate-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="bg-orange-500 rounded-3xl p-12 lg:p-20 shadow-2xl shadow-orange-500/20">
+                <h2 class="text-4xl lg:text-6xl font-black text-white mb-6 uppercase italic">Start Recovering <br>Found Money Today</h2>
+                <p class="text-orange-100 text-xl mb-10 max-w-2xl mx-auto">
+                    Stop letting $15,000 jobs go to your competitors. Capture every lead, in every language, 24 hours a day.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <input type="email" placeholder="Enter your business email" class="bg-white px-6 py-4 rounded-lg text-slate-900 w-full sm:w-80 outline-none focus:ring-2 ring-slate-950 transition">
+                    <button class="bg-slate-950 text-white px-8 py-4 rounded-lg font-bold hover:bg-slate-900 transition shadow-xl">Get Started Free</button>
+                </div>
+                <p class="mt-6 text-orange-200 text-sm font-medium">Risk-free trial. See your first 5 leads for free.</p>
             </div>
-            <p class="mt-8 text-slate-500 font-medium">Join 50+ roofing companies scaling with Bilingual AI.</p>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 border-t border-slate-800">
+    <footer class="py-12 border-t border-slate-800 bg-slate-950">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0">
-                <div class="flex items-center space-x-2">
-                    <div class="w-8 h-8 bg-brand-accent rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex items-center gap-2">
+                    <div class="w-6 h-6 bg-orange-500 rounded flex items-center justify-center">
+                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1-1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     </div>
-                    <span class="text-lg font-extrabold tracking-tight text-white uppercase">Never Miss A Call</span>
+                    <span class="font-bold text-lg tracking-tight text-white uppercase italic">Never Miss A Call</span>
                 </div>
                 <div class="text-slate-500 text-sm">
-                    © 2024 Never Miss A Call. All rights reserved. Built for Roofers.
+                    © 2024 Never Miss A Call AI. All rights reserved.
                 </div>
-                <div class="flex space-x-6 text-slate-400">
-                    <a href="#" class="hover:text-brand-accent transition">Privacy Policy</a>
-                    <a href="#" class="hover:text-brand-accent transition">Terms of Service</a>
+                <div class="flex gap-6 text-slate-400 text-sm">
+                    <a href="#" class="hover:text-orange-500 transition">Terms</a>
+                    <a href="#" class="hover:text-orange-500 transition">Privacy</a>
+                    <a href="#" class="hover:text-orange-500 transition">Contact</a>
                 </div>
             </div>
         </div>
