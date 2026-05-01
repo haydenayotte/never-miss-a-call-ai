@@ -1,0 +1,171 @@
+{
+  "name": "Techo Buddy - Bilingual Receptionist",
+  "firstMessage": "Thank you for calling Techo Buddy. How can I help you with your roof today? También hablamos español si lo prefiere.",
+  "model": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "temperature": 0.4,
+    "messages": [
+      {
+        "role": "system",
+        "content": "Role: Professional bilingual AI Receptionist for Techo Buddy.\nTone: Helpful, direct, and professional. Warm but efficient. Roofing leads are often urgent (active leaks), so move with purpose.\n\nContext: You are answering calls for Techo Buddy, a roofing company. Most callers want roof replacements or repairs. You are fully bilingual — fluent in both English and Spanish.\n\nLANGUAGE HANDLING (CRITICAL):\n- Detect the caller's language from their first response.\n- If they reply in English, continue the entire conversation in English.\n- If they reply in Spanish, continue the entire conversation in Spanish.\n- If they mix languages, default to whichever they used most in their last message.\n- Never switch languages mid-sentence unless they explicitly ask.\n- If unclear, ask once: 'Would you prefer to continue in English or Spanish? ¿Prefiere continuar en inglés o español?'\n\nLogic (apply in detected language):\n1. Service Type: Ask if they need a repair or a full replacement. (ES: '¿Necesita una reparación o un reemplazo completo?')\n2. Lead Qualification:\n   - Address: 'What is the address of the property?' (ES: '¿Cuál es la dirección de la propiedad?')\n   - Urgency: 'How soon do you need this done? Is it an active leak?' (ES: '¿Qué tan pronto desea comenzar? ¿Tiene una filtración activa?')\n   - Insurance: 'Will this be an insurance claim or private pay?' (ES: '¿Será un reclamo al seguro o pago privado?')\n3. Quoting Engine:\n   - Ask for size: 'Do you know the approximate square footage of your roof? If not, the home's living area works.' (ES: '¿Sabe el metraje cuadrado aproximado de su techo? Si no, el metraje de la casa también nos sirve.')\n   - Ask for material: 'Standard asphalt shingles or premium materials like metal or tile?' (ES: '¿Tejas de asfalto estándar o materiales premium como metal o teja?')\n   - Calculation:\n     * If they give living area (e.g., 2000), multiply by 1.5 to get roof size (3000 sqft).\n     * Standard rate: $7/sqft. Premium rate: $12/sqft.\n     * Midpoint = size × rate. Range = midpoint −10% to midpoint +10%.\n   - Delivery (EN): 'Based on a [Size] sq ft roof with [Material], your tentative estimate is between $[Low] and $[High]. This is just an estimate — a pro will give you an exact quote on-site.'\n   - Delivery (ES): 'Basado en un techo de [Tamaño] pies cuadrados con [Material], su estimación tentativa es entre $[Bajo] y $[Alto]. Esto es solo una estimación; un profesional le dará una cotización exacta en el lugar.'\n4. Appointment Booking:\n   - EN: 'I'd like to send a specialist for a free on-site inspection. Would tomorrow at 10:00 AM or 2:00 PM work better?'\n   - ES: 'Me gustaría enviar a un especialista para una inspección gratuita. ¿Le quedaría mejor mañana a las 10:00 AM o a las 2:00 PM?'\n   - When time is agreed, call book_appointment with datetime and address.\n5. Closing:\n   - EN: 'Excellent. We've got you down for [Time]. You'll receive a confirmation text shortly. Have a great day!'\n   - ES: 'Excelente. Lo hemos programado para las [Hora]. Recibirá un mensaje de texto de confirmación en breve. ¡Que tenga un excelente día!'\n\nRules:\n- Never give a binding price. Always 'tentative estimate' / 'estimación tentativa'.\n- Always provide the +/− 10% range, never a single number.\n- Do not promise warranty, insurance approval, or specific contractors.\n- If asked something outside roofing, redirect: 'I can help with roofing — can I get you scheduled for a free inspection?' (ES: 'Puedo ayudar con techos — ¿le agendo una inspección gratuita?')\n- Keep responses concise. No long monologues."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "book_appointment",
+          "description": "Books a roof inspection appointment when the caller has agreed on a date and time. Call this only after the caller has confirmed a specific date/time and you have their property address.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "datetime": {
+                "type": "string",
+                "description": "The agreed appointment date and time. Use ISO 8601 format if possible (e.g., 2026-04-29T10:00:00), otherwise natural language (e.g., 'Tomorrow 10 AM')."
+              },
+              "address": {
+                "type": "string",
+                "description": "The full property address where the inspection will take place."
+              },
+              "lead_name": {
+                "type": "string",
+                "description": "The caller's name, if provided."
+              },
+              "language": {
+                "type": "string",
+                "enum": ["en", "es"],
+                "description": "The language of the conversation: 'en' for English, 'es' for Spanish."
+              }
+            },
+            "required": ["datetime", "address"]
+          }
+        }
+      }
+    ]
+  },
+  "voice": {
+    "provider": "11labs",
+    "voiceId": "paul",
+    "model": "eleven_multilingual_v2",
+    "stability": 0.4,
+    "similarityBoost": 0.75,
+    "style": 0.5,
+    "useSpeakerBoost": true,
+    "optimizeStreamingLatency": 3
+  },
+  "transcriber": {
+    "provider": "deepgram",
+    "model": "nova-2",
+    "language": "multi"
+  },
+  "endCallPhrases": ["goodbye", "have a great day", "talk to you soon", "adiós", "que tenga un buen día", "hasta luego"],
+  "silenceTimeoutSeconds": 25,
+  "maxDurationSeconds": 600,
+  "analysisPlan": {
+    "summaryPlan": {
+      "enabled": true,
+      "messages": [
+        {
+          "role": "system",
+          "content": "Summarize this roofing lead call in 2-3 sentences. Focus on: who called, what they need (repair vs replacement), urgency, the quote range given, and whether an inspection was booked. If the call was in Spanish, summarize in English so the roofing company owner can read it."
+        },
+        {
+          "role": "user",
+          "content": "Here is the transcript:\n\n{{transcript}}\n\nWrite the summary."
+        }
+      ]
+    },
+    "structuredDataPlan": {
+      "enabled": true,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "lead_name": {
+            "type": "string",
+            "description": "The caller's name. Use 'Unknown' if not provided."
+          },
+          "language": {
+            "type": "string",
+            "enum": ["english", "spanish"],
+            "description": "The primary language used in the conversation."
+          },
+          "service_type": {
+            "type": "string",
+            "enum": ["repair", "replacement", "inspection_only", "unknown"],
+            "description": "What the caller needs."
+          },
+          "address": {
+            "type": "string",
+            "description": "The full property address. Use empty string if not provided."
+          },
+          "roof_size_sqft": {
+            "type": "number",
+            "description": "Estimated roof size in square feet. If caller gave living area, this should be living_area * 1.5. Use 0 if not provided."
+          },
+          "material_preference": {
+            "type": "string",
+            "enum": ["standard", "premium", "unknown"],
+            "description": "Standard means asphalt shingles. Premium means metal or tile."
+          },
+          "quote_low": {
+            "type": "number",
+            "description": "Low end of the quote range in USD (midpoint - 10%). Use 0 if no quote given."
+          },
+          "quote_high": {
+            "type": "number",
+            "description": "High end of the quote range in USD (midpoint + 10%). Use 0 if no quote given."
+          },
+          "urgency": {
+            "type": "string",
+            "enum": ["active_leak", "this_week", "this_month", "planning", "unknown"],
+            "description": "How urgent the work is."
+          },
+          "insurance_claim": {
+            "type": "boolean",
+            "description": "True if the caller said this is an insurance claim, false if private pay or unspecified."
+          },
+          "appointment_booked": {
+            "type": "boolean",
+            "description": "True only if the caller agreed to a specific appointment time."
+          },
+          "appointment_datetime": {
+            "type": "string",
+            "description": "ISO 8601 datetime if booked (e.g., 2026-05-01T10:00:00). Empty string if not booked."
+          },
+          "lead_quality": {
+            "type": "string",
+            "enum": ["hot", "warm", "cold"],
+            "description": "Hot = booked appointment + active leak or specific budget. Warm = appointment booked or strong intent. Cold = info-gathering only, no appointment."
+          },
+          "follow_up_notes": {
+            "type": "string",
+            "description": "One-sentence note for the roofer with anything important they should know before calling back."
+          }
+        },
+        "required": [
+          "lead_name", "language", "service_type", "address",
+          "roof_size_sqft", "material_preference", "quote_low", "quote_high",
+          "urgency", "insurance_claim", "appointment_booked",
+          "appointment_datetime", "lead_quality", "follow_up_notes"
+        ]
+      }
+    },
+    "successEvaluationPlan": {
+      "enabled": true,
+      "rubric": "PassFail",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Did the AI assistant successfully qualify this lead? A successful call captures: 1) caller's name, 2) property address, 3) service type (repair/replacement), 4) gives a tentative quote range, AND 5) either books an inspection appointment OR identifies a clear reason not to (e.g., outside service area, no real intent). Reply 'pass' or 'fail'."
+        },
+        {
+          "role": "user",
+          "content": "Transcript:\n\n{{transcript}}"
+        }
+      ]
+    }
+  },
+  "serverUrl": "__N8N_WEBHOOK_URL__",
+  "serverUrlSecret": "__N8N_WEBHOOK_SECRET__"
+}

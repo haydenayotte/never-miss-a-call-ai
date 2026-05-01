@@ -1,0 +1,261 @@
+{
+  "name": "Techo Buddy - Lead Pipeline",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "techo-buddy-leads",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Vapi Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "webhookId": "techo-buddy-leads"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.body.message.type }}",
+              "rightValue": "end-of-call-report",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "filter-end-of-call",
+      "name": "Only End-of-Call Reports",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse the Vapi end-of-call-report into a flat lead object\nconst msg = $input.first().json.body.message;\nconst sd = msg.analysis?.structuredData || {};\nconst customer = msg.customer || {};\nconst call = msg.call || {};\n\nconst pad = (n) => String(n).padStart(2, '0');\nconst now = new Date();\nconst timestamp = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;\n\nreturn {\n  // Identity\n  call_id: call.id || msg.callId || '',\n  timestamp,\n  phone: customer.number || msg.customer?.number || '',\n  lead_name: sd.lead_name || 'Unknown',\n\n  // Extracted lead data\n  language: sd.language || 'english',\n  service_type: sd.service_type || 'unknown',\n  address: sd.address || '',\n  roof_size_sqft: Number(sd.roof_size_sqft) || 0,\n  material_preference: sd.material_preference || 'unknown',\n  quote_low: Number(sd.quote_low) || 0,\n  quote_high: Number(sd.quote_high) || 0,\n  urgency: sd.urgency || 'unknown',\n  insurance_claim: Boolean(sd.insurance_claim),\n  appointment_booked: Boolean(sd.appointment_booked),\n  appointment_datetime: sd.appointment_datetime || '',\n  lead_quality: sd.lead_quality || 'cold',\n  follow_up_notes: sd.follow_up_notes || '',\n\n  // Call metadata\n  summary: msg.analysis?.summary || msg.summary || '',\n  recording_url: msg.recordingUrl || msg.stereoRecordingUrl || '',\n  transcript: msg.transcript || '',\n  duration_seconds: msg.durationSeconds || 0\n};"
+      },
+      "id": "parse-lead",
+      "name": "Parse Lead",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 0]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $env.GOOGLE_SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{ $json.timestamp }}",
+            "Lead Name": "={{ $json.lead_name }}",
+            "Phone": "={{ $json.phone }}",
+            "Language": "={{ $json.language }}",
+            "Service Type": "={{ $json.service_type }}",
+            "Address": "={{ $json.address }}",
+            "Roof Size (sqft)": "={{ $json.roof_size_sqft }}",
+            "Material": "={{ $json.material_preference }}",
+            "Quote Low": "={{ $json.quote_low }}",
+            "Quote High": "={{ $json.quote_high }}",
+            "Urgency": "={{ $json.urgency }}",
+            "Insurance Claim": "={{ $json.insurance_claim }}",
+            "Appointment Booked": "={{ $json.appointment_booked }}",
+            "Appointment DateTime": "={{ $json.appointment_datetime }}",
+            "Lead Quality": "={{ $json.lead_quality }}",
+            "Follow-up Notes": "={{ $json.follow_up_notes }}",
+            "Summary": "={{ $json.summary }}",
+            "Recording URL": "={{ $json.recording_url }}",
+            "Call ID": "={{ $json.call_id }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "sheets-append",
+      "name": "Google Sheets — Append Lead",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.4,
+      "position": [660, -200]
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "databaseId": {
+          "__rl": true,
+          "value": "={{ $env.NOTION_DATABASE_ID }}",
+          "mode": "id"
+        },
+        "title": "={{ $json.lead_name }}",
+        "propertiesUi": {
+          "propertyValues": [
+            { "key": "Status|select", "selectValue": "New" },
+            { "key": "Phone|phone_number", "phoneValue": "={{ $json.phone }}" },
+            { "key": "Language|select", "selectValue": "={{ $json.language === 'spanish' ? 'Spanish' : 'English' }}" },
+            { "key": "Service Type|select", "selectValue": "={{ $json.service_type === 'repair' ? 'Repair' : $json.service_type === 'replacement' ? 'Replacement' : $json.service_type === 'inspection_only' ? 'Inspection Only' : 'Unknown' }}" },
+            { "key": "Address|rich_text", "textContent": "={{ $json.address }}" },
+            { "key": "Roof Size (sqft)|number", "numberValue": "={{ $json.roof_size_sqft }}" },
+            { "key": "Material|select", "selectValue": "={{ $json.material_preference === 'standard' ? 'Standard' : $json.material_preference === 'premium' ? 'Premium' : 'Unknown' }}" },
+            { "key": "Quote Low|number", "numberValue": "={{ $json.quote_low }}" },
+            { "key": "Quote High|number", "numberValue": "={{ $json.quote_high }}" },
+            { "key": "Urgency|select", "selectValue": "={{ ({active_leak:'Active Leak', this_week:'This Week', this_month:'This Month', planning:'Planning'})[$json.urgency] || 'Unknown' }}" },
+            { "key": "Insurance Claim|checkbox", "checkboxValue": "={{ $json.insurance_claim }}" },
+            { "key": "Appointment Booked|checkbox", "checkboxValue": "={{ $json.appointment_booked }}" },
+            { "key": "Appointment|date", "date": "={{ $json.appointment_datetime || null }}" },
+            { "key": "Lead Quality|select", "selectValue": "={{ $json.lead_quality === 'hot' ? 'Hot' : $json.lead_quality === 'warm' ? 'Warm' : 'Cold' }}" },
+            { "key": "Follow-up Notes|rich_text", "textContent": "={{ $json.follow_up_notes }}" },
+            { "key": "Summary|rich_text", "textContent": "={{ $json.summary }}" },
+            { "key": "Recording|url", "urlValue": "={{ $json.recording_url }}" },
+            { "key": "Call ID|rich_text", "textContent": "={{ $json.call_id }}" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "notion-create",
+      "name": "Notion — Create Lead",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [660, 0]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.appointment_booked }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            },
+            {
+              "leftValue": "={{ $json.appointment_datetime }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-appointment-booked",
+      "name": "If Appointment Booked",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [660, 200]
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "={{ $env.GOOGLE_CALENDAR_ID }}",
+          "mode": "id"
+        },
+        "start": "={{ $json.appointment_datetime }}",
+        "end": "={{ DateTime.fromISO($json.appointment_datetime).plus({hours: 1}).toISO() }}",
+        "additionalFields": {
+          "summary": "=Roof Inspection — {{ $json.lead_name }}",
+          "description": "=Lead from Techo Buddy AI receptionist.\\n\\nCaller: {{ $json.lead_name }}\\nPhone: {{ $json.phone }}\\nAddress: {{ $json.address }}\\nService: {{ $json.service_type }}\\nQuote Range: ${{ $json.quote_low }} - ${{ $json.quote_high }}\\nMaterial: {{ $json.material_preference }}\\nUrgency: {{ $json.urgency }}\\nLanguage: {{ $json.language }}\\n\\nNotes: {{ $json.follow_up_notes }}\\n\\nCall summary: {{ $json.summary }}\\n\\nRecording: {{ $json.recording_url }}",
+          "location": "={{ $json.address }}"
+        }
+      },
+      "id": "gcal-create",
+      "name": "Google Calendar — Create Inspection",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [880, 100]
+    },
+    {
+      "parameters": {
+        "from": "={{ $env.TWILIO_FROM_NUMBER }}",
+        "to": "={{ $env.OWNER_PHONE_NUMBER }}",
+        "message": "=🏠 NEW LEAD — Techo Buddy\\n\\n{{ $json.lead_name }} ({{ $json.phone }})\\n📍 {{ $json.address || 'No address' }}\\n🔥 {{ $json.lead_quality.toUpperCase() }} lead — {{ $json.urgency }}\\n💰 Quote: ${{ $json.quote_low }} - ${{ $json.quote_high }}\\n{{ $json.appointment_booked ? '✅ Inspection: ' + $json.appointment_datetime : '⚠️ No appointment booked' }}\\n\\n{{ $json.follow_up_notes }}\\n\\nFull lead in Notion + Sheets.",
+        "options": {}
+      },
+      "id": "twilio-sms",
+      "name": "Twilio — SMS to Owner",
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [660, 400]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"received\": true, \"lead\": \"{{ $('Parse Lead').item.json.lead_name }}\" }",
+        "options": {}
+      },
+      "id": "respond",
+      "name": "Respond OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1100, 0]
+    }
+  ],
+  "connections": {
+    "Vapi Webhook": {
+      "main": [[{ "node": "Only End-of-Call Reports", "type": "main", "index": 0 }]]
+    },
+    "Only End-of-Call Reports": {
+      "main": [
+        [{ "node": "Parse Lead", "type": "main", "index": 0 }],
+        [{ "node": "Respond OK", "type": "main", "index": 0 }]
+      ]
+    },
+    "Parse Lead": {
+      "main": [
+        [
+          { "node": "Google Sheets — Append Lead", "type": "main", "index": 0 },
+          { "node": "Notion — Create Lead", "type": "main", "index": 0 },
+          { "node": "If Appointment Booked", "type": "main", "index": 0 },
+          { "node": "Twilio — SMS to Owner", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "If Appointment Booked": {
+      "main": [
+        [{ "node": "Google Calendar — Create Inspection", "type": "main", "index": 0 }],
+        []
+      ]
+    },
+    "Google Sheets — Append Lead": {
+      "main": [[{ "node": "Respond OK", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "pinData": {},
+  "versionId": "techo-buddy-v1",
+  "triggerCount": 0,
+  "tags": [{"name": "techo-buddy"}]
+}

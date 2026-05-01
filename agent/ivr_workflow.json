@@ -1,0 +1,61 @@
+{
+  "name": "Techo Buddy - Language Router",
+  "nodes": [
+    {
+      "name": "greeter",
+      "type": "conversation",
+      "isStart": true,
+      "metadata": {
+        "position": {"x": 0, "y": 0}
+      },
+      "prompt": "You are a language router. After the caller responds (either by pressing a digit or by saying English or Spanish), you must respond ONCE with a brief acknowledgment in their chosen language and then stop.\n\n- If they chose English (pressed 1, said English, said one, said uno): respond with exactly 'One moment, connecting you now.'\n- If they chose Spanish (pressed 2, said Spanish, said Español, said dos, said two): respond with exactly 'Un momento, conectándole ahora.'\n- If unclear or no response after 5 seconds: respond with 'One moment, connecting you now.' and treat as English.\n\nKeypad entries appear in the transcript as 'User's Keypad Entry: 1' or 'User's Keypad Entry: 2'. Treat these as keypress 1 or 2.\n\nAfter your acknowledgment, do not say anything else. Do not ask questions. Do not engage further. Your only job is to acknowledge and let the workflow route.",
+      "messagePlan": {
+        "firstMessage": "Thank you for calling Techo Buddy. For English, press 1 or say English. Para español, oprima el dos o diga español."
+      },
+      "variableExtractionPlan": {
+        "output": [
+          {
+            "type": "string",
+            "title": "language",
+            "description": "the caller's chosen language: 'english' if they pressed 1, said English, said uno, or said one. 'spanish' if they pressed 2, said Spanish, said Español, said dos, or said two. Default to 'english' if unclear."
+          }
+        ]
+      }
+    },
+    {
+      "name": "route_to_english",
+      "type": "assistant",
+      "metadata": {
+        "position": {"x": -300, "y": 400}
+      },
+      "assistantId": "__ENGLISH_ASSISTANT_ID__"
+    },
+    {
+      "name": "route_to_spanish",
+      "type": "assistant",
+      "metadata": {
+        "position": {"x": 300, "y": 400}
+      },
+      "assistantId": "__SPANISH_ASSISTANT_ID__"
+    }
+  ],
+  "edges": [
+    {
+      "from": "greeter",
+      "to": "route_to_spanish",
+      "condition": {
+        "type": "ai",
+        "prompt": "the caller indicated they want Spanish — they pressed 2 (transcript shows 'User's Keypad Entry: 2'), said Spanish, said Español, said dos, or said two"
+      }
+    },
+    {
+      "from": "greeter",
+      "to": "route_to_english",
+      "condition": {
+        "type": "ai",
+        "prompt": "the caller indicated they want English, pressed 1 (transcript shows 'User's Keypad Entry: 1'), said English, said uno, said one, did not respond, or gave any other response that isn't clearly Spanish"
+      }
+    }
+  ],
+  "globalPrompt": ""
+}
